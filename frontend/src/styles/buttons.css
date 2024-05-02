@@ -1,0 +1,41 @@
+button,
+input[type="submit"],
+input[type="button"] {
+  width: auto;
+  font-family: "Trebuchet MS", sans-serif;
+  border: none;
+  color: var(--pcolor);
+  padding: 0.5rem 1.5rem;
+  font-size: 20px;
+}
+button,
+input[type="button"] {
+  background-color: var(--simplecolor);
+}
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+  background-color: var(--hovercolor);
+  color: var(--reversepcolor);
+}
+button.reverse,
+input[type="button"].reverse,
+input[type="submit"].reverse {
+  width: auto;
+  font-family: "Trebuchet MS", sans-serif;
+  border: none;
+  background-color: var(--pcolor);
+  color: var(--simplecolor);
+  padding: 0.5rem 1.5rem;
+  font-size: 20px;
+}
+button.reverse:hover,
+input[type="button"].reverse:hover,
+input[type="submit"].reverse:hover {
+  background-color: var(--bgcolor);
+  color: var(--pcolor);
+}
+a.active button {
+  background-color: var(--greencolor);
+  color: var(--reversepcolor);
+}

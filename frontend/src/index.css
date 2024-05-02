@@ -1,0 +1,62 @@
+@import "./styles/reset.css";
+
+@import "./styles/loader.css";
+@import "./styles/popup.css";
+
+@import "./styles/scrollbar.css";
+@import "./styles/text.css";
+@import "./styles/forms.css";
+@import "./styles/buttons.css";
+@import "./styles/blocks.css";
+
+:root {
+  --bgcolor: black;
+  --hovercolor: #dceeff;
+  --simplecolor: #222222;
+  --simplecolorop: #222222cc;
+  --sbgcolor: black;
+  --hcolor: aliceblue;
+  --h2color: rgb(228, 228, 228);
+  --pcolor: rgb(210, 210, 210);
+  --reversepcolor: black;
+  --blurcolor: rgba(255, 255, 255, 0.05);
+  --greencolor: #00ff82;
+  --redcolor: #ff5959;
+  --orangecolor: #ffb759;
+  --bluecolor: #5964ff;
+}
+
+.light-mode,
+body[class] {
+  --bgcolor: aliceblue;
+  --hovercolor: rgb(45, 45, 45);
+  --simplecolor: #dceeff;
+  --simplecolorop: #dceeffcc;
+  --sbgcolor: aliceblue;
+  --hcolor: rgb(33, 33, 33);
+  --h2color: rgb(37, 37, 37);
+  --pcolor: rgb(41, 41, 41);
+  --reversepcolor: aliceblue;
+  --blurcolor: rgba(0, 0, 0, 0.1);
+}
+
+/*
+main styles
+*/
+body {
+  background-color: var(--bgcolor);
+  margin: 0;
+  font-family: "Trebuchet MS", sans-serif;
+}
+main {
+  min-height: calc(100 * var(--vh) - 3px);
+  width: 100%;
+  align-items: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+main .content {
+  max-width: 350px;
+  padding: 10px;
+}
