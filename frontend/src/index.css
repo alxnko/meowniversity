@@ -1,6 +1,7 @@
 @import "./styles/reset.css";
 
 @import "./styles/loader.css";
+@import "./styles/menu.css";
 @import "./styles/popup.css";
 
 @import "./styles/scrollbar.css";
@@ -55,8 +56,4 @@ main {
   margin: auto;
   display: flex;
   justify-content: center;
-}
-main .content {
-  max-width: 350px;
-  padding: 10px;
 }

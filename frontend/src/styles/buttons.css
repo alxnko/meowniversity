@@ -11,12 +11,18 @@ input[type="button"] {
 button,
 input[type="button"] {
   background-color: var(--simplecolor);
+  color: var(--pcolor) !important;
 }
 button:hover,
-input[type="button"]:hover,
-input[type="submit"]:hover {
+input[type="button"]:hover {
   background-color: var(--hovercolor);
-  color: var(--reversepcolor);
+  color: var(--reversepcolor) !important;
+}
+input[type="button"].admin:hover {
+  background-color: var(--redcolor);
+}
+input[type="submit"]:hover {
+  background-color: var(--greencolor);
 }
 button.reverse,
 input[type="button"].reverse,
@@ -35,7 +41,15 @@ input[type="submit"].reverse:hover {
   background-color: var(--bgcolor);
   color: var(--pcolor);
 }
-a.active button {
+.round-button {
+  text-align: left;
+  /* width: 350px; */
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--simplecolor);
+  margin-top: 10px;
+}
+button.active {
   background-color: var(--greencolor);
-  color: var(--reversepcolor);
+  color: var(--reversepcolor) !important;
 }

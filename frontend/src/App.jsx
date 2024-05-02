@@ -9,14 +9,16 @@ import {
   TranslationContext,
 } from "./assets/contexts/contexts";
 import Main from "./assets/pages/Main/Main";
+import Top from "./assets/pages/Main/Top";
 import NoPage from "./assets/pages/NoPage";
 import { DetectTheme } from "./assets/scripts/darklight";
 import "./assets/scripts/i18n";
 import setTrueVH from "./assets/scripts/truevh";
+import Login from "./assets/pages/Auth/Login";
 
 function App() {
   const { i18n, t } = useTranslation();
-  const [isLoader, setIsLoader] = useState(false);
+  const [isLoader, setIsLoader] = useState(true);
   const [user, setUser] = useState(undefined);
   const [menu, setMenu] = useState(undefined);
 
@@ -30,7 +32,22 @@ function App() {
     fetchUser();
   }, []);
 
-  const fetchUser = async () => {};
+  const fetchUser = async () => {
+    await fetch("/api/u/get_current_user")
+      .then((res) => {
+        if (res.status != "200") {
+          return undefined;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (typeof data === "object") {
+          if ("id" in data) setUser(data);
+          else setUser("unAuth");
+          setIsLoader(false);
+        }
+      });
+  };
 
   return (
     <TranslationContext.Provider value={{ t, ts, i18n }}>
@@ -41,7 +58,8 @@ function App() {
               <Routes>
                 <Route path="/" element={<Layout />}>
                   <Route index element={<Main />} />
-                  {/* <Route path="login" element={<Login />} /> */}
+                  <Route path="login" element={<Login />} />
+                  <Route path="top" element={<Top />} />
                   <Route path="*" element={<NoPage />} />
                 </Route>
               </Routes>

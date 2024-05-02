@@ -1,1 +1,42 @@
-{ "lang": "Language" }
+{
+  "lang": "Language",
+
+  "id": "ID",
+  "phone": "Phone",
+  "email": "Email",
+
+  "class": "Class",
+  "description": "Description",
+
+  "time": "Time",
+  "type": "Type",
+
+  "grade": "Grade",
+  "average": "Average",
+
+  "name": "Name",
+  "username": "Username",
+  "password": "Password",
+
+  "adminPanel": "Admin Panel",
+  "adminPassword": "Admin password",
+
+  "add": "Add",
+  "addStudent": "Add Student",
+  "addClass": "Add Class",
+  "addGrade": "Add Grade",
+
+  "classes": "Classes",
+  "students": "Students",
+  "grades": "Grades",
+
+  "auth": "Authorization",
+  "login": "Log in",
+
+  "baddata": "fields are empty or filled in incorrectly",
+  "unauth": "authorization failed, check your username and password",
+  "takenusername": "username is already taken",
+  "nouser": "user is not found",
+
+  "userPanel": "User Panel"
+}

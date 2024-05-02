@@ -1,0 +1,71 @@
+/* menu */
+.submenu {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  background-color: var(--simplecolor);
+  justify-content: center;
+  width: 100vw;
+}
+.submenu #openMenu {
+  display: none;
+}
+.submenu button,
+.user button {
+  width: 80px;
+  height: 56px;
+}
+.submenu button svg {
+  font-size: 25px;
+  margin: auto;
+}
+.menu {
+  position: fixed;
+  align-items: center;
+  z-index: 999;
+}
+.menu .main {
+  position: absolute;
+  width: 350px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--simplecolor);
+}
+.user {
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.menu .main button,
+.user button {
+  font-size: 32px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+  margin-top: 5px;
+}
+.menu .main button svg,
+.user svg {
+  width: 40px;
+  height: 40px;
+  transform: translateX(-40%);
+}
+
+svg.no,
+.menu h2 svg {
+  width: auto;
+  height: auto;
+  font-size: unset !important;
+  transform: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .submenu #openMenu {
+    display: block;
+  }
+}

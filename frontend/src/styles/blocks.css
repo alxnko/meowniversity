@@ -2,9 +2,10 @@
 blocks
 */
 .block {
-  padding: 30px;
+  margin: 10px 0;
+  padding: 15px;
   background-color: var(--simplecolor);
-  border-radius: 30px;
+  border-radius: 10px;
 }
 .fwc {
   left: 50%;
@@ -21,7 +22,13 @@ blocks
   width: 80px;
 }
 .w3 {
-  width: 110px;
+  width: 130px;
+}
+.w3:first-child {
+  margin-right: 5px;
+}
+.w3:last-child {
+  margin-left: 5px;
 }
 .container {
   display: flex;
@@ -50,7 +57,7 @@ blocks
   justify-content: space-between;
 }
 .full-bg {
-  min-height: calc(100 * var(--vh) - 3px);
+  min-height: calc(100 * var(--vh));
   top: 0;
   left: 0;
   width: 100%;

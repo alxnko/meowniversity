@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { AuthContext, LoaderContext } from "../contexts/contexts";
 import Loader from "./Loader/Loader";
 import Menu from "./Menu/Menu";
+import AdminMenu from "./Menu/AdminMenu";
 import SubMenu from "./Menu/SubMenu";
 
 export default function Layout() {
@@ -22,7 +23,13 @@ export default function Layout() {
     <>
       <Loader show={isLoader} />
       <SubMenu />
-      {user ? <Menu /> : null}
+      {user && user != "unAuth" ? (
+        user == "Admin" ? (
+          <AdminMenu />
+        ) : (
+          <Menu />
+        )
+      ) : null}
       <main>
         <div className="content">
           <Outlet />
