@@ -22,10 +22,18 @@ export default function AddGrade({
 
   useEffect(() => {
     if (isEdit) {
-      setUsername(isEdit.username);
-      setClassName(isEdit.className);
-      setType(isEdit.type);
-      setGrade(isEdit.grade);
+      if (isShow) {
+        setUsername(isEdit.username);
+        setClassName(isEdit.className);
+        setType(isEdit.type);
+        setGrade(isEdit.grade);
+      } else {
+        setUsername("");
+        setClassName("");
+        setType("quiz");
+        setGrade("");
+        setIsEdit(false);
+      }
     }
   }, [isShow]);
 

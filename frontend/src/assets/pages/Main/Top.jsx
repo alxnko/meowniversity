@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TranslationContext } from "../../contexts/contexts";
 import StudentBlock from "../../blocks/blocks/StudentBlock";
+import Logo from "../../blocks/Logo/Logo";
 
 export default function Top() {
   const [students, setStudents] = useState(undefined);
@@ -18,7 +19,8 @@ export default function Top() {
   }, []);
   return (
     <div>
-      <h1>Top</h1>
+      <Logo />
+      <h1 className="center">Top</h1>
       {students
         ? students.map((item) => <StudentBlock key={item.id} item={item} />)
         : null}

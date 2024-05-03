@@ -1,6 +1,11 @@
 {
   "lang": "Язык",
 
+  "logoText1": "МЯУ",
+  "logoText2": "ниверситет",
+  "logo2Text1": "МЯ",
+  "logo2Text2": "Университет",
+
   "id": "ID",
   "phone": "Телефон",
   "email": "Email",

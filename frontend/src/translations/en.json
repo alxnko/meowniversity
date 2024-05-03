@@ -1,6 +1,11 @@
 {
   "lang": "Language",
 
+  "logoText1": "MEOW",
+  "logoText2": "niversity",
+  "logo2Text1": "MEO",
+  "logo2Text2": "University",
+
   "id": "ID",
   "phone": "Phone",
   "email": "Email",

@@ -19,11 +19,20 @@ export default function AddStudent({
 
   useEffect(() => {
     if (isEdit) {
-      setName(isEdit.name);
-      setEmail(isEdit.email);
-      setPhone(isEdit.phone);
-      setUsername(isEdit.username);
-      setPassword(isEdit.password);
+      if (isShow) {
+        setName(isEdit.name);
+        setEmail(isEdit.email);
+        setPhone(isEdit.phone);
+        setUsername(isEdit.username);
+        setPassword(isEdit.password);
+      } else {
+        setName("");
+        setEmail("");
+        setPhone("");
+        setUsername("");
+        setPassword("");
+        setIsEdit(false);
+      }
     }
   }, [isShow]);
 

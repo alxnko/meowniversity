@@ -7,6 +7,7 @@ import AdminList from "./AdminList";
 import StudentBlock from "../blocks/StudentBlock";
 import ClassBlock from "../blocks/ClassBlock";
 import GradeBlock from "../blocks/GradeBlock";
+import Logo from "../Logo/Logo";
 
 export default function AdminPanel() {
   const { t } = useContext(TranslationContext);
@@ -165,6 +166,7 @@ export default function AdminPanel() {
         setIsEdit={setIsEdit}
       />
       <div>
+        <Logo />
         <h2 className="center">{t("adminPanel")}</h2>
         <div>
           <button

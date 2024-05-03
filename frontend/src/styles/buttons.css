@@ -23,6 +23,7 @@ input[type="button"].admin:hover {
 }
 input[type="submit"]:hover {
   background-color: var(--greencolor);
+  color: black !important;
 }
 button.reverse,
 input[type="button"].reverse,
@@ -43,7 +44,6 @@ input[type="submit"].reverse:hover {
 }
 .round-button {
   text-align: left;
-  /* width: 350px; */
   padding: 10px;
   border-radius: 5px;
   background-color: var(--simplecolor);
@@ -51,5 +51,5 @@ input[type="submit"].reverse:hover {
 }
 button.active {
   background-color: var(--greencolor);
-  color: var(--reversepcolor) !important;
+  color: black !important;
 }

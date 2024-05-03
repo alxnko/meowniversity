@@ -56,3 +56,6 @@ a.link:hover {
 .under-input-text {
   max-width: 95%;
 }
+span.green {
+  color: var(--greencolor);
+}

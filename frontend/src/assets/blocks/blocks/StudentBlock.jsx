@@ -15,12 +15,16 @@ export default function StudentBlock({ item, remove, edit }) {
               {t("name")}: {item.name}
             </h3>
             <p>id: {item.id}</p>
-            <p>
-              {t("email")}: {item.email}
-            </p>
-            <p>
-              {t("phone")}: {item.phone}
-            </p>
+            {item.email ? (
+              <p>
+                {t("email")}: {item.email}
+              </p>
+            ) : null}
+            {item.phone ? (
+              <p>
+                {t("phone")}: {item.phone}
+              </p>
+            ) : null}
             <hr />
             {item.password ? <h3>{t("login")}</h3> : null}
             <p>
@@ -35,7 +39,7 @@ export default function StudentBlock({ item, remove, edit }) {
           <div>
             <p>{t("average")}</p>
             <h2>{item.averageGrade}</h2>
-            {user == "Admin" ? (
+            {user.phone && user == "Admin" ? (
               <>
                 <button onClick={() => edit(item)}>
                   <MdEdit />

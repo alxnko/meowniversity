@@ -4,6 +4,7 @@ import IsNotAuth from "../../blocks/Auth/IsNotAuth";
 import { AuthContext, TranslationContext } from "../../contexts/contexts";
 import { createPostData } from "../../scripts/createPostData";
 import AdminLogin from "./AdminLogin";
+import Logo from "../../blocks/Logo/Logo";
 
 export default function Login() {
   const [showAdminLogin, setShowAdminLogin] = useState(false);
@@ -42,6 +43,7 @@ export default function Login() {
   return (
     <>
       <AdminLogin isShow={showAdminLogin} setIsShow={setShowAdminLogin} />
+      <Logo />
       <form onSubmit={logMe}>
         <IsNotAuth />
         <h1 className="center">{t("auth")}</h1>

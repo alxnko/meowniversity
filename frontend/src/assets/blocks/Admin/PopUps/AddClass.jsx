@@ -16,8 +16,14 @@ export default function AddClass({
 
   useEffect(() => {
     if (isEdit) {
-      setName(isEdit.name);
-      setDescription(isEdit.description);
+      if (isShow) {
+        setName(isEdit.name);
+        setDescription(isEdit.description);
+      } else {
+        setName("");
+        setDescription("");
+        setIsEdit(false);
+      }
     }
   }, [isShow]);
 
