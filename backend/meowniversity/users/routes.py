@@ -90,3 +90,8 @@ def edit_user():
     user.phone = data["phone"]
     db.session.commit()
     return user_to_dict_for_admin(user)
+
+@users.route("/api/u/admin_login", methods=["POST"])
+def admin_login():
+    data = request.get_json()
+    return {"isAdmin": data['password'] == "meowniversity"}
