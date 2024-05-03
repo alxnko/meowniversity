@@ -105,7 +105,9 @@ export default function AddStudent({
   return (
     <PopUp show={isShow} setIsShow={setIsShow}>
       <form onSubmit={addStudent}>
-        <h3 className="center">{t("addStudent")}</h3>
+        <h3 className="center">
+          {isEdit ? t("editStudent") : t("addStudent")}
+        </h3>
         <label htmlFor="student-name">{t("name")}</label>
         <input
           type="text"
@@ -142,7 +144,7 @@ export default function AddStudent({
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="flex-center">
-          <input type="submit" value={t("add")} />
+          <input type="submit" value={isEdit ? t("edit") : t("add")} />
         </div>
       </form>
     </PopUp>

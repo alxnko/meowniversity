@@ -120,7 +120,7 @@ export default function AddGrade({
   return (
     <PopUp show={isShow} setIsShow={setIsShow}>
       <form onSubmit={addGrade}>
-        <h3 className="center">{t("addGrade")}</h3>
+        <h3 className="center">{isEdit ? t("editGrade") : t("addGrade")}</h3>
         <label htmlFor="username">{t("username")}</label>
         <input
           type="text"
@@ -172,7 +172,7 @@ export default function AddGrade({
           onChange={gradeHandler}
         />
         <div className="flex-center">
-          <input type="submit" value={t("add")} />
+          <input type="submit" value={isEdit ? t("edit") : t("add")} />
         </div>
       </form>
     </PopUp>

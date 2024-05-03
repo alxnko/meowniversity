@@ -36,10 +36,10 @@ export default function StudentBlock({ item, remove, edit }) {
               </p>
             ) : null}
           </div>
-          <div>
+          <div style={{ minWidth: "65px", textAlign: "right" }}>
             <p>{t("average")}</p>
             <h2>{item.averageGrade}</h2>
-            {user.phone && user == "Admin" ? (
+            {item.phone && user == "Admin" ? (
               <>
                 <button onClick={() => edit(item)}>
                   <MdEdit />

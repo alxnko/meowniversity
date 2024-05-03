@@ -168,7 +168,7 @@ export default function AdminPanel() {
       <div>
         <Logo />
         <h2 className="center">{t("adminPanel")}</h2>
-        <div>
+        <div className="flex-center">
           <button
             onClick={() => setShowAddStudent(true)}
             className="round-button w3"
@@ -188,7 +188,7 @@ export default function AdminPanel() {
             {t("addGrade")}
           </button>
         </div>
-        <div>
+        <div className="flex-center">
           <button
             className={
               "round-button w3" + (panelView == "students" ? " active" : "")

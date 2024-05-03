@@ -29,7 +29,7 @@ export default function StudentBlock({ item, remove, edit }) {
               </>
             ) : null}
           </div>
-          <div>
+          <div style={{ minWidth: "65px", textAlign: "right" }}>
             <p>{t("average")}</p>
             <h2>{item.averageGrade}</h2>
           </div>

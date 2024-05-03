@@ -80,7 +80,7 @@ export default function AddClass({
   return (
     <PopUp show={isShow} setIsShow={setIsShow}>
       <form onSubmit={addClass}>
-        <h3 className="center">{t("addClass")}</h3>
+        <h3 className="center">{isEdit ? t("editClass") : t("addClass")}</h3>
         <label htmlFor="class-name">{t("name")}</label>
         <input
           type="text"
@@ -96,7 +96,7 @@ export default function AddClass({
           onChange={(e) => setDescription(e.target.value)}
         />
         <div className="flex-center">
-          <input type="submit" value={t("add")} />
+          <input type="submit" value={isEdit ? t("edit") : t("add")} />
         </div>
       </form>
     </PopUp>

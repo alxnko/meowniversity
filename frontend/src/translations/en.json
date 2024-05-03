@@ -31,6 +31,11 @@
   "addClass": "Add Class",
   "addGrade": "Add Grade",
 
+  "edit": "Edit",
+  "editStudent": "Edit Student",
+  "editClass": "Edit Class",
+  "editGrade": "Edit Grade",
+
   "classes": "Classes",
   "students": "Students",
   "grades": "Grades",

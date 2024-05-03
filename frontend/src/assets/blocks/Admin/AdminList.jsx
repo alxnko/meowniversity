@@ -28,18 +28,20 @@ export default function AdminList({ Component, data, remove, edit }) {
           onChange={(e) => setSearch(e.target.value)}
         />
       ) : null}
-      {data
-        ? data.map((item) =>
-            hasValue(item, search) ? (
-              <Component
-                key={item.id}
-                item={item}
-                remove={remove}
-                edit={edit}
-              />
-            ) : null
-          )
-        : null}
+      <div className="flex-column-center">
+        {data
+          ? data.map((item) =>
+              hasValue(item, search) ? (
+                <Component
+                  key={item.id}
+                  item={item}
+                  remove={remove}
+                  edit={edit}
+                />
+              ) : null
+            )
+          : null}
+      </div>
     </div>
   );
 }

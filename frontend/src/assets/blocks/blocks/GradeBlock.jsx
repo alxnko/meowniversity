@@ -26,7 +26,7 @@ export default function StudentBlock({ item, remove, edit }) {
               {t("type")}: {item.type}
             </p>
           </div>
-          <div>
+          <div style={{ minWidth: "65px", textAlign: "right" }}>
             <p>{t("grade")}</p>
             <h2>{item.grade}</h2>
             {user == "Admin" ? (
