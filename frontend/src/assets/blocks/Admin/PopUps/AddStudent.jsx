@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TranslationContext } from "../../../contexts/contexts";
 import PopUp from "../../../blocks/PopUps/PopUp";
+import { TranslationContext } from "../../../contexts/contexts";
 import { createPostData } from "../../../scripts/createPostData";
 
 export default function AddStudent({
@@ -104,7 +104,7 @@ export default function AddStudent({
 
   return (
     <PopUp show={isShow} setIsShow={setIsShow}>
-      <form onSubmit={addStudent}>
+      <form autoComplete="off" onSubmit={addStudent}>
         <h3 className="center">
           {isEdit ? t("editStudent") : t("addStudent")}
         </h3>
@@ -113,6 +113,7 @@ export default function AddStudent({
           type="text"
           name="student-name"
           value={name}
+          autoComplete="off"
           onChange={(e) => setName(e.target.value)}
         />
         <label htmlFor="email">{t("email")}</label>
@@ -120,6 +121,7 @@ export default function AddStudent({
           type="email"
           name="email"
           value={email}
+          autoComplete="off"
           onChange={(e) => setEmail(e.target.value)}
         />
         <label htmlFor="phone">{t("phone")}</label>
@@ -127,6 +129,7 @@ export default function AddStudent({
           type="phone"
           name="phone"
           value={phone}
+          autoComplete="off"
           onChange={(e) => setPhone(e.target.value)}
         />
         <label htmlFor="username">{t("username")}</label>
@@ -134,6 +137,7 @@ export default function AddStudent({
           type="text"
           name="username"
           value={username}
+          autoComplete="off"
           onChange={handleUsername}
         />
         <label htmlFor="password">{t("password")}</label>
@@ -141,6 +145,7 @@ export default function AddStudent({
           type="text"
           name="password"
           value={password}
+          autoComplete="off"
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="flex-center">

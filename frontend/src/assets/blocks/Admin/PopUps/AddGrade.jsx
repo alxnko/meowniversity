@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TranslationContext } from "../../../contexts/contexts";
-import PopUp from "../../PopUps/PopUp";
 import { createPostData } from "../../../scripts/createPostData";
+import PopUp from "../../PopUps/PopUp";
 
 export default function AddGrade({
   isShow,
@@ -142,6 +142,7 @@ export default function AddGrade({
           type="text"
           name="className"
           value={className}
+          autoComplete="off"
           onChange={(e) => setClassName(e.target.value)}
           list="classes"
         />

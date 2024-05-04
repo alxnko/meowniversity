@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TranslationContext, AuthContext } from "../../contexts/contexts";
+import { AuthContext, TranslationContext } from "../../contexts/contexts";
+import AdminList from "../Admin/AdminList";
 import ClassBlock from "../blocks/ClassBlock";
 import GradeBlock from "../blocks/GradeBlock";
-import AdminList from "../Admin/AdminList";
 import Logo from "../Logo/Logo";
 
 export default function UserPanel() {
@@ -66,7 +66,7 @@ export default function UserPanel() {
                 {t("phone")}: {user.phone}
               </p>
             </div>
-            <div>
+            <div style={{ minWidth: "65px", textAlign: "right" }}>
               <p>{t("average")}</p>
               <h1>{user.averageGrade}</h1>
             </div>

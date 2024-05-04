@@ -14,16 +14,18 @@ def user_to_dict_for_admin(user: Student):
         "password": user.password,
         "email": user.email,
         "phone": user.phone,
-        "averageGrade": sum([grade.grade for grade in user.grades]) / len(user.grades) if len(user.grades) > 0 else 0,
+        "averageGrade": sum([grade.grade for grade in user.grades]) // len(user.grades) if len(user.grades) > 0 else 0,
     }
-    
+
+
 def user_to_dict(user: Student):
     return {
         "id": user.id,
         "username": user.username,
         "name": user.name,
-        "averageGrade": sum([grade.grade for grade in user.grades]) / len(user.grades) if len(user.grades) > 0 else 0,
+        "averageGrade": sum([grade.grade for grade in user.grades]) // len(user.grades) if len(user.grades) > 0 else 0,
     }
+
 
 @users.route("/api/u/get_current_user")
 def get_user():
@@ -33,6 +35,7 @@ def get_user():
 @users.route("/api/u/get_users")
 def get_users():
     return {"users": [user_to_dict_for_admin(user) for user in Student.query.all()][::-1]}
+
 
 @users.route("/api/u/add_user", methods=["POST"])
 def add_user():
@@ -51,6 +54,7 @@ def add_user():
     db.session.commit()
     return user_to_dict_for_admin(user)
 
+
 @users.route("/api/u/login", methods=["POST"])
 def login():
     data = request.get_json()
@@ -60,16 +64,19 @@ def login():
         return user_to_dict_for_admin(user)
     return {"error": "Bad username or password"}
 
+
 @users.route("/api/u/logout")
 @login_required
 def logout():
     logout_user()
     return {"success": True}
 
+
 @users.route("/api/u/get_top")
 def get_top():
     users = [user for user in Student.query.all()]
     return {"users": [user_to_dict(user) for user in sorted(users, key=lambda user: sum([grade.grade for grade in user.grades]) / len(user.grades) if len(user.grades) > 0 else 0, reverse=True)]}
+
 
 @users.route("/api/u/delete_user", methods=["POST"])
 def delete_user():
@@ -78,6 +85,7 @@ def delete_user():
     db.session.delete(user)
     db.session.commit()
     return {"success": True}
+
 
 @users.route("/api/u/edit_user", methods=["POST"])
 def edit_user():
@@ -90,6 +98,7 @@ def edit_user():
     user.phone = data["phone"]
     db.session.commit()
     return user_to_dict_for_admin(user)
+
 
 @users.route("/api/u/admin_login", methods=["POST"])
 def admin_login():

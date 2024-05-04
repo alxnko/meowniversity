@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TranslationContext } from "../../contexts/contexts";
 import StudentBlock from "../../blocks/blocks/StudentBlock";
 import Logo from "../../blocks/Logo/Logo";
+import { TranslationContext } from "../../contexts/contexts";
 
 export default function Top() {
   const [students, setStudents] = useState(undefined);
+  const { t } = useContext(TranslationContext);
   useEffect(() => {
     fetch("/api/u/get_top")
       .then((res) => {
@@ -20,7 +21,7 @@ export default function Top() {
   return (
     <div>
       <Logo />
-      <h1 className="center">Top</h1>
+      <h1 className="center">{t("top")}</h1>
       {students
         ? students.map((item) => <StudentBlock key={item.id} item={item} />)
         : null}

@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TranslationContext } from "../../contexts/contexts";
-import StudentBlock from "../blocks/StudentBlock";
 
 export default function AdminList({ Component, data, remove, edit }) {
   const [search, setSearch] = useState("");

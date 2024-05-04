@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { AuthContext, LoaderContext } from "../contexts/contexts";
 import Loader from "./Loader/Loader";
-import Menu from "./Menu/Menu";
 import AdminMenu from "./Menu/AdminMenu";
+import Menu from "./Menu/Menu";
 import SubMenu from "./Menu/SubMenu";
 
 export default function Layout() {
@@ -31,7 +31,7 @@ export default function Layout() {
         )
       ) : null}
       <main>
-        <div className="content">
+        <div style={{ marginBottom: "60px" }} className="content">
           <Outlet />
         </div>
       </main>

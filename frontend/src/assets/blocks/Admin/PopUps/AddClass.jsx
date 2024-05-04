@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TranslationContext } from "../../../contexts/contexts";
 import PopUp from "../../../blocks/PopUps/PopUp";
+import { TranslationContext } from "../../../contexts/contexts";
 import { createPostData } from "../../../scripts/createPostData";
 
 export default function AddClass({
@@ -86,6 +86,7 @@ export default function AddClass({
           type="text"
           name="class-name"
           value={name}
+          autoComplete="off"
           onChange={(e) => setName(e.target.value)}
         />
         <label htmlFor="description">{t("description")}</label>
@@ -93,6 +94,7 @@ export default function AddClass({
           type="text"
           name="description"
           value={description}
+          autoComplete="off"
           onChange={(e) => setDescription(e.target.value)}
         />
         <div className="flex-center">
