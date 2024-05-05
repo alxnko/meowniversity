@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
-import { TranslationContext, AuthContext } from "../../contexts/contexts";
-import { MdEdit, MdDelete } from "react-icons/md";
+import React, { useContext } from "react";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { AuthContext, TranslationContext } from "../../contexts/contexts";
 
 export default function StudentBlock({ item, remove, edit }) {
   const { t } = useContext(TranslationContext);
@@ -18,7 +18,7 @@ export default function StudentBlock({ item, remove, edit }) {
             <p>
               {t("description")}: {item.description}
             </p>
-            {user == "Admin" ? (
+            {user.type == "admin" ? (
               <>
                 <button onClick={() => edit(item)}>
                   <MdEdit />

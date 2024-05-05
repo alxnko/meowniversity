@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext, TranslationContext } from "../../contexts/contexts";
 import AdminList from "../Admin/AdminList";
+import AddStudent from "../Admin/PopUps/AddStudent";
 import ClassBlock from "../blocks/ClassBlock";
 import GradeBlock from "../blocks/GradeBlock";
 import Logo from "../Logo/Logo";
 
 export default function UserPanel() {
   const { t } = useContext(TranslationContext);
-  const { user } = useContext(AuthContext);
+  const { user, fetchUser } = useContext(AuthContext);
   const [panelView, setPanelView] = useState("");
 
   const [classes, setClasses] = useState(undefined);
   const [grades, setGrades] = useState(undefined);
+
+  const [isEdit, setIsEdit] = useState(false);
 
   function getClasses() {
     fetch("/api/c/get_my_classes")
@@ -47,56 +50,71 @@ export default function UserPanel() {
   }, [panelView]);
 
   return (
-    <div>
-      {user ? (
-        <>
-          <Logo />
-          <h2 className="center">{t("userPanel")}</h2>
-          <br />
-          <div className="flex jc-sb">
+    <>
+      <AddStudent
+        isShow={isEdit}
+        setIsShow={setIsEdit}
+        getStudents={fetchUser}
+        isEdit={user}
+        setIsEdit={(a) => {}}
+      />
+      <div>
+        {user ? (
+          <>
+            <Logo />
+            <h2 className="center">{t("userPanel")}</h2>
+            <br />
+            <div className="flex jc-sb">
+              <div>
+                <h1>{user.name}</h1>
+                <h4>
+                  {user.username}#{user.id}
+                </h4>
+                <p>
+                  {t("email")}: {user.email}
+                </p>
+                <p>
+                  {t("phone")}: {user.phone}
+                </p>
+              </div>
+              <div style={{ minWidth: "65px", textAlign: "right" }}>
+                <p>{t("average")}</p>
+                <h1>{user.averageGrade}</h1>
+              </div>
+            </div>
             <div>
-              <h1>{user.name}</h1>
-              <h4>
-                {user.username}#{user.id}
-              </h4>
-              <p>
-                {t("email")}: {user.email}
-              </p>
-              <p>
-                {t("phone")}: {user.phone}
-              </p>
+              <button
+                className={
+                  "round-button w3" + (panelView == "classes" ? " active" : "")
+                }
+                onClick={() => setPanelView("classes")}
+              >
+                {t("classes")}
+              </button>
+              <button
+                className={
+                  "round-button w3" + (panelView == "grades" ? " active" : "")
+                }
+                onClick={() => setPanelView("grades")}
+              >
+                {t("grades")}
+              </button>
+              <button
+                onClick={() => setIsEdit(true)}
+                className="round-button w3"
+              >
+                {t("edit")}
+              </button>
             </div>
-            <div style={{ minWidth: "65px", textAlign: "right" }}>
-              <p>{t("average")}</p>
-              <h1>{user.averageGrade}</h1>
+            <div style={{ display: panelView == "classes" ? "block" : "none" }}>
+              <AdminList Component={ClassBlock} data={classes} />
             </div>
-          </div>
-          <div>
-            <button
-              className={
-                "round-button w3" + (panelView == "classes" ? " active" : "")
-              }
-              onClick={() => setPanelView("classes")}
-            >
-              {t("classes")}
-            </button>
-            <button
-              className={
-                "round-button w3" + (panelView == "grades" ? " active" : "")
-              }
-              onClick={() => setPanelView("grades")}
-            >
-              {t("grades")}
-            </button>
-          </div>
-          <div style={{ display: panelView == "classes" ? "block" : "none" }}>
-            <AdminList Component={ClassBlock} data={classes} />
-          </div>
-          <div style={{ display: panelView == "grades" ? "block" : "none" }}>
-            <AdminList Component={GradeBlock} data={grades} />
-          </div>
-        </>
-      ) : null}
-    </div>
+            <div style={{ display: panelView == "grades" ? "block" : "none" }}>
+              <AdminList Component={GradeBlock} data={grades} />
+            </div>
+          </>
+        ) : null}
+      </div>
+    </>
   );
 }

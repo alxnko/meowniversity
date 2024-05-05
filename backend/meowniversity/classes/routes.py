@@ -1,5 +1,5 @@
-from flask import request, Blueprint
-from flask_login import login_user, current_user, logout_user, login_required
+from flask import request, Blueprint, session
+from flask_login import current_user, logout_user, login_required
 from meowniversity.models import Class, Grade
 from meowniversity import db
 
@@ -28,6 +28,8 @@ def class_to_dict(class_: Class):
 
 @classes.route("/api/c/add_class", methods=["POST"])
 def add_class():
+    if session["type"] != "admin":
+        return {"error": "noRights"}
     data = request.get_json()
     class_ = Class(
         name=data["name"],
@@ -39,6 +41,7 @@ def add_class():
 
 
 @classes.route("/api/c/get_my_classes")
+@login_required
 def get_my_classes():
     return {"classes": [class_to_dict(class_) for class_ in Class.query.all()][::-1]}
 
@@ -50,6 +53,8 @@ def get_classes():
 
 @classes.route("/api/c/delete_class", methods=["POST"])
 def delete_class():
+    if session["type"] != "admin":
+        return {"error": "noRights"}
     data = request.get_json()
     class_ = Class.query.filter_by(id=data["id"]).first()
     db.session.delete(class_)
@@ -59,6 +64,8 @@ def delete_class():
 
 @classes.route("/api/c/edit_class", methods=["POST"])
 def edit_class():
+    if session["type"] != "admin":
+        return {"error": "noRights"}
     data = request.get_json()
     class_ = Class.query.filter_by(id=data["id"]).first()
     class_.name = data["name"]

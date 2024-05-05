@@ -1,36 +1,44 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TranslationContext } from "../../contexts/contexts";
-import AddStudent from "./PopUps/AddStudent";
-import AddClass from "./PopUps/AddClass";
-import AddGrade from "./PopUps/AddGrade";
-import AdminList from "./AdminList";
-import StudentBlock from "../blocks/StudentBlock";
+import { AuthContext, TranslationContext } from "../../contexts/contexts";
+import AdminBlock from "../blocks/AdminBlock";
 import ClassBlock from "../blocks/ClassBlock";
 import GradeBlock from "../blocks/GradeBlock";
+import StudentBlock from "../blocks/StudentBlock";
 import Logo from "../Logo/Logo";
+import AdminList from "./AdminList";
+import AddAdmin from "./PopUps/AddAdmin";
+import AddClass from "./PopUps/AddClass";
+import AddGrade from "./PopUps/AddGrade";
+import AddStudent from "./PopUps/AddStudent";
 
 export default function AdminPanel() {
   const { t } = useContext(TranslationContext);
+  const { user } = useContext(AuthContext);
+
   const [panelView, setPanelView] = useState(undefined);
 
   const [students, setStudents] = useState(undefined);
   const [classes, setClasses] = useState(undefined);
   const [grades, setGrades] = useState(undefined);
+  const [admins, setAdmins] = useState(undefined);
 
   const [showAddStudent, setShowAddStudent] = useState(false);
   const [showAddClass, setShowAddClass] = useState(false);
   const [showAddGrade, setShowAddGrade] = useState(false);
+  const [showAddAdmin, setShowAddAdmin] = useState(false);
 
   const [isEdit, setIsEdit] = useState(false);
 
   function edit(item) {
     setIsEdit(item);
-    if ("password" in item) {
-      setShowAddStudent(true);
+    if ("type" in item) {
+      setShowAddAdmin(true);
     } else if ("grade" in item) {
       setShowAddGrade(true);
     } else if ("description" in item) {
       setShowAddClass(true);
+    } else if ("password" in item) {
+      setShowAddStudent(true);
     }
   }
 
@@ -52,7 +60,6 @@ export default function AdminPanel() {
         getStudents();
       });
   }
-
   function deleteClass(id) {
     fetch("/api/c/delete_class", {
       method: "POST",
@@ -71,7 +78,6 @@ export default function AdminPanel() {
         getClasses();
       });
   }
-
   function deleteGrade(id) {
     fetch("/api/g/delete_grade", {
       method: "POST",
@@ -88,6 +94,24 @@ export default function AdminPanel() {
       })
       .then((data) => {
         getGrades();
+      });
+  }
+  function deleteAdmin(id) {
+    fetch("/api/u/delete_admin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
+    })
+      .then((res) => {
+        if (res.status != "200") {
+          return "error";
+        }
+        return res.json();
+      })
+      .then((data) => {
+        getAdmins();
       });
   }
 
@@ -127,6 +151,18 @@ export default function AdminPanel() {
         setGrades(data.grades);
       });
   }
+  function getAdmins() {
+    fetch("/api/u/get_admins")
+      .then((res) => {
+        if (res.status != "200") {
+          return "error";
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setAdmins(data.admins);
+      });
+  }
 
   useEffect(() => {
     if (panelView == "students") {
@@ -135,6 +171,8 @@ export default function AdminPanel() {
       getClasses();
     } else if (panelView == "grades") {
       getGrades();
+    } else if (panelView == "admins") {
+      getAdmins();
     }
   }, [panelView]);
 
@@ -162,6 +200,14 @@ export default function AdminPanel() {
         getStudents={getStudents}
         getClasses={getClasses}
         getGrades={getGrades}
+        isEdit={isEdit}
+        setIsEdit={setIsEdit}
+      />
+      <AddAdmin
+        isShow={showAddAdmin}
+        setIsShow={setShowAddAdmin}
+        admins={admins}
+        getAdmins={getAdmins}
         isEdit={isEdit}
         setIsEdit={setIsEdit}
       />
@@ -213,6 +259,15 @@ export default function AdminPanel() {
           >
             {t("grades")}
           </button>
+          <button
+            style={{ display: user.username == "alxnko" ? "block" : "none" }}
+            className={
+              "round-button w3" + (panelView == "admins" ? " active" : "")
+            }
+            onClick={() => setPanelView("admins")}
+          >
+            {t("admins")}
+          </button>
         </div>
         <div style={{ display: panelView == "students" ? "block" : "none" }}>
           <AdminList
@@ -235,6 +290,21 @@ export default function AdminPanel() {
             Component={GradeBlock}
             data={grades}
             remove={deleteGrade}
+            edit={edit}
+          />
+        </div>
+        <div style={{ display: panelView == "admins" ? "block" : "none" }}>
+          <div
+            style={{ marginTop: "10px" }}
+            onClick={() => setShowAddAdmin(true)}
+            className="flex-center"
+          >
+            <button className="">{t("addAdmin")}</button>
+          </div>
+          <AdminList
+            Component={AdminBlock}
+            data={admins}
+            remove={deleteAdmin}
             edit={edit}
           />
         </div>

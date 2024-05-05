@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { AuthContext, TranslationContext } from "../../contexts/contexts";
-import { toLocalTime, toTime } from "../../scripts/time";
 
 export default function StudentBlock({ item, remove, edit }) {
   const { t } = useContext(TranslationContext);
@@ -12,27 +11,23 @@ export default function StudentBlock({ item, remove, edit }) {
       {item ? (
         <>
           <div>
-            <h4>
-              {t("name")}: {item.name} ({item.username}#{item.student_id})
-            </h4>
-            <h4>
-              {t("class")}: {item.className} (#{item.class_id})
-            </h4>
-            <p>
-              {t("teacher")}: {item.teacher}
-            </p>
+            <h3>
+              {t("name")}: {item.name}
+            </h3>
             <p>id: {item.id}</p>
+            <hr />
+            {item.password ? <h3>{t("login")}</h3> : null}
             <p>
-              {t("time")}: {toTime(toLocalTime(item.time))}
+              {t("username")}: {item.username}
             </p>
-            <p>
-              {t("type")}: {item.type}
-            </p>
+            {item.password ? (
+              <p>
+                {t("password")}: {item.password}
+              </p>
+            ) : null}
           </div>
-          <div style={{ minWidth: "65px", textAlign: "right" }}>
-            <p>{t("grade")}</p>
-            <h2>{item.grade}</h2>
-            {user.type == "admin" ? (
+          <div>
+            {user.type == "admin" && user.id != item.id ? (
               <>
                 <button onClick={() => edit(item)}>
                   <MdEdit />

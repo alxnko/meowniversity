@@ -1,18 +1,26 @@
 import React, { useContext, useState } from "react";
-import { AuthContext, TranslationContext } from "../../contexts/contexts";
-import PopUp from "../../blocks/PopUps/PopUp";
 import { useNavigate } from "react-router-dom";
+import PopUp from "../../blocks/PopUps/PopUp";
+import { AuthContext, TranslationContext } from "../../contexts/contexts";
 import { createPostData } from "../../scripts/createPostData";
 
 export default function LanguageSelector({ isShow, setIsShow }) {
   const { t } = useContext(TranslationContext);
   const { setUser } = useContext(AuthContext);
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const handleUsername = (e) => {
+    setUsername(e.target.value.replace(/\s/g, "").toLowerCase());
+  };
+
   const authAdmin = async (e) => {
     e.preventDefault();
-    fetch("/api/u/admin_login", createPostData({ password: password }))
+    fetch(
+      "/api/u/admin_login",
+      createPostData({ username: username, password: password })
+    )
       .then((res) => {
         if (res.status != "200") {
           return "error";
@@ -20,8 +28,8 @@ export default function LanguageSelector({ isShow, setIsShow }) {
         return res.json();
       })
       .then((data) => {
-        if (data.isAdmin) {
-          setUser("Admin");
+        if ("id" in data) {
+          setUser(data);
           navigate("/");
         }
       });
@@ -30,6 +38,14 @@ export default function LanguageSelector({ isShow, setIsShow }) {
   return (
     <PopUp show={isShow} setIsShow={setIsShow}>
       <form onSubmit={authAdmin}>
+        <label htmlFor="admin-username">{t("username")}</label>
+        <input
+          id="admin-username"
+          type="username"
+          autoComplete="username"
+          value={username}
+          onChange={handleUsername}
+        />
         <label htmlFor="admin-password">{t("adminPassword")}</label>
         <input
           type="password"

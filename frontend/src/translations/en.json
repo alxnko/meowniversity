@@ -43,6 +43,7 @@
   "classes": "Classes",
   "students": "Students",
   "grades": "Grades",
+  "admins": "Admins",
 
   "auth": "Authorization",
   "login": "Log in",

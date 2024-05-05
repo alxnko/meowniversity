@@ -1,10 +1,33 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
+import { FaSignInAlt } from "react-icons/fa";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { AuthContext, TranslationContext } from "../../contexts/contexts";
-import { MdEdit, MdDelete } from "react-icons/md";
+import { createPostData } from "../../scripts/createPostData";
 
 export default function StudentBlock({ item, remove, edit }) {
   const { t } = useContext(TranslationContext);
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+
+  const login = () => {
+    fetch(
+      "/api/u/login",
+      createPostData({
+        username: item.username,
+        password: item.password,
+      })
+    )
+      .then((res) => {
+        if (res.status != "200") {
+          return "error";
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if ("id" in data) {
+          setUser(data);
+        }
+      });
+  };
 
   return (
     <div className="block flex jc-sb">
@@ -39,7 +62,7 @@ export default function StudentBlock({ item, remove, edit }) {
           <div style={{ minWidth: "65px", textAlign: "right" }}>
             <p>{t("average")}</p>
             <h2>{item.averageGrade}</h2>
-            {item.phone && user == "Admin" ? (
+            {item.phone && user.type == "admin" ? (
               <>
                 <button onClick={() => edit(item)}>
                   <MdEdit />
@@ -47,6 +70,10 @@ export default function StudentBlock({ item, remove, edit }) {
                 <br />
                 <button onClick={() => remove(item.id)}>
                   <MdDelete />
+                </button>
+                <br />
+                <button onClick={() => login()}>
+                  <FaSignInAlt />
                 </button>
               </>
             ) : null}
