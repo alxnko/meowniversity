@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IsNotAuth from "../../blocks/Auth/IsNotAuth";
+import Logo from "../../blocks/Logo/Logo";
 import { AuthContext, TranslationContext } from "../../contexts/contexts";
 import { createPostData } from "../../scripts/createPostData";
 import AdminLogin from "./AdminLogin";
-import Logo from "../../blocks/Logo/Logo";
 
 export default function Login() {
   const [showAdminLogin, setShowAdminLogin] = useState(false);
@@ -47,7 +47,7 @@ export default function Login() {
       <form onSubmit={logMe}>
         <IsNotAuth />
         <h1 className="center">{t("auth")}</h1>
-        <label htmlFor="username">{t("username")}</label>
+        <label htmlFor="username">{t("username3")}</label>
         <input
           id="username"
           type="username"
@@ -55,7 +55,7 @@ export default function Login() {
           value={username}
           onChange={handleUsername}
         />
-        <label htmlFor="password">{t("password")}</label>
+        <label htmlFor="password">{t("password8")}</label>
         <input
           id="password"
           type="password"

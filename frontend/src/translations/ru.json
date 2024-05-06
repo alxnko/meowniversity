@@ -16,29 +16,47 @@
   "description": "Описание",
 
   "time": "Время",
+  "action": "Действие",
   "type": "Тип",
 
   "grade": "Оценка",
   "average": "Средняя",
+  "quizAverage": "Средняя quiz",
+  "midtermAverage": "Средняя midterm",
+  "finalAverage": "Средняя final",
+
+  "log": "Лог",
+  "logs": "Логи",
+  "feedback": "Обращение",
+  "feedbacks": "Обращения",
 
   "name": "Имя",
+  "address": "Адрес",
+  "teacher": "Учитель",
   "username": "Имя пользователя",
   "password": "Пароль",
+  "username3": "Имя пользователя (3 или более символов)",
+  "password8": "Пароль (8 или более символов)",
 
   "adminPanel": "Админ панель",
-  "adminPassword": "Пароль админа",
 
   "search": "Поиск",
+  "text": "Текст",
+
+  "hi": "Привет",
 
   "add": "Добавить",
   "addStudent": "Добавить студента",
   "addClass": "Добавить класс",
   "addGrade": "Добавить оценку",
+  "addAdmin": "Добавить админа",
+  "addFeedback": "Добавить обращение",
 
   "edit": "Редактировать",
   "editStudent": "Редактировать студента",
   "editClass": "Редактировать класс",
   "editGrade": "Редактировать оценку",
+  "editAdmin": "Редактировать админа",
 
   "students": "Студенты",
   "classes": "Классы",
@@ -53,5 +71,7 @@
   "takenusername": "имя пользователя уже занято",
   "nouser": "пользователь не найден",
 
-  "userPanel": "Панель пользователя"
+  "userPanel": "Панель пользователя",
+
+  "className": "Название класса"
 }

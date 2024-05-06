@@ -14,6 +14,7 @@ export default function AddStudent({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,12 +24,14 @@ export default function AddStudent({
         setName(isEdit.name);
         setEmail(isEdit.email);
         setPhone(isEdit.phone);
+        setAddress(isEdit.address);
         setUsername(isEdit.username);
         setPassword(isEdit.password);
       } else {
         setName("");
         setEmail("");
         setPhone("");
+        setAddress("");
         setUsername("");
         setPassword("");
         setIsEdit(false);
@@ -52,6 +55,7 @@ export default function AddStudent({
             password: password,
             email: email,
             phone: phone,
+            address: address,
             id: isEdit.id,
           })
         )
@@ -65,6 +69,7 @@ export default function AddStudent({
             setName("");
             setEmail("");
             setPhone("");
+            setAddress("");
             setUsername("");
             setPassword("");
             getStudents();
@@ -81,6 +86,7 @@ export default function AddStudent({
             password: password,
             email: email,
             phone: phone,
+            address: address,
           })
         )
           .then((res) => {
@@ -93,6 +99,7 @@ export default function AddStudent({
             setName("");
             setEmail("");
             setPhone("");
+            setAddress("");
             setUsername("");
             setPassword("");
             getStudents();
@@ -126,13 +133,21 @@ export default function AddStudent({
         />
         <label htmlFor="phone">{t("phone")}</label>
         <input
-          type="phone"
+          type="text"
           name="phone"
           value={phone}
           autoComplete="off"
           onChange={(e) => setPhone(e.target.value)}
         />
-        <label htmlFor="username">{t("username")}</label>
+        <label htmlFor="address">{t("address")}</label>
+        <input
+          type="text"
+          name="address"
+          value={address}
+          autoComplete="off"
+          onChange={(e) => setAddress(e.target.value)}
+        />
+        <label htmlFor="username">{t("username3")}</label>
         <input
           type="text"
           name="username"
@@ -140,7 +155,7 @@ export default function AddStudent({
           autoComplete="off"
           onChange={handleUsername}
         />
-        <label htmlFor="password">{t("password")}</label>
+        <label htmlFor="password">{t("password8")}</label>
         <input
           type="text"
           name="password"

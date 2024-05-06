@@ -53,3 +53,6 @@ button.active {
   background-color: var(--greencolor);
   color: black !important;
 }
+.edit {
+  max-width: unset !important;
+}

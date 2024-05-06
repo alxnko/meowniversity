@@ -38,6 +38,15 @@ export default function StudentBlock({ item, remove, edit }) {
               {t("name")}: {item.name}
             </h3>
             <p>id: {item.id}</p>
+            <p>
+              {t("quizAverage")}: {item.quizAverage}
+            </p>
+            <p>
+              {t("midtermAverage")}: {item.midtermAverage}
+            </p>
+            <p>
+              {t("finalAverage")}: {item.finalAverage}
+            </p>
             {item.email ? (
               <p>
                 {t("email")}: {item.email}
@@ -46,6 +55,11 @@ export default function StudentBlock({ item, remove, edit }) {
             {item.phone ? (
               <p>
                 {t("phone")}: {item.phone}
+              </p>
+            ) : null}
+            {item.address ? (
+              <p>
+                {t("address")}: {item.address}
               </p>
             ) : null}
             <hr />

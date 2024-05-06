@@ -38,7 +38,7 @@ export default function LanguageSelector({ isShow, setIsShow }) {
   return (
     <PopUp show={isShow} setIsShow={setIsShow}>
       <form onSubmit={authAdmin}>
-        <label htmlFor="admin-username">{t("username")}</label>
+        <label htmlFor="admin-username">{t("username3")}</label>
         <input
           id="admin-username"
           type="username"
@@ -46,7 +46,7 @@ export default function LanguageSelector({ isShow, setIsShow }) {
           value={username}
           onChange={handleUsername}
         />
-        <label htmlFor="admin-password">{t("adminPassword")}</label>
+        <label htmlFor="admin-password">{t("password8")}</label>
         <input
           type="password"
           name="admin-password"

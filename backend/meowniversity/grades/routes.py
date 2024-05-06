@@ -1,7 +1,8 @@
 from flask import request, Blueprint, session
-from flask_login import login_user, current_user, logout_user, login_required
+from flask_login import current_user, login_required
 from meowniversity.models import Grade, Student, Class, Admin
 from meowniversity import db
+from meowniversity.log.routes import add_log
 
 grades = Blueprint("grades", __name__)
 
@@ -24,7 +25,9 @@ def grade_to_dict(grade: Grade):
 
 
 @grades.route("/api/g/get_my_grades")
+@login_required
 def get_my_grades():
+    add_log(f"student {current_user.username} requested grades")
     return {"grades": [grade_to_dict(grade) for grade in Grade.query.filter_by(student_id=current_user.id).all()][::-1]}
 
 
@@ -41,6 +44,8 @@ def add_grade():
         grade=data["grade"],
         admin_id=current_user.id
     )
+    add_log(
+        f"admin {current_user.username} added grade {data['username']} {data['className']} {data['type']} {data['grade']}")
     db.session.add(grade)
     db.session.commit()
     return grade_to_dict(grade)
@@ -48,6 +53,9 @@ def add_grade():
 
 @grades.route("/api/g/get_grades")
 def get_grades():
+    if session["type"] != "admin":
+        return {"error": "noRights"}
+    add_log("admin " + current_user.username + " requested all grades")
     return {"grades": [grade_to_dict(grade) for grade in Grade.query.all()][::-1]}
 
 
@@ -57,6 +65,8 @@ def delete_grade():
         return {"error": "noRights"}
     data = request.get_json()
     grade = Grade.query.filter_by(id=data["id"]).first()
+    add_log(
+        f"admin {current_user.username} deleted grade {grade.username} {grade.className} {grade.type} {grade.grade}")
     db.session.delete(grade)
     db.session.commit()
     return {"success": True}
@@ -70,5 +80,7 @@ def edit_grade():
     grade = Grade.query.filter_by(id=data["id"]).first()
     grade.type = data["type"]
     grade.grade = data["grade"]
+    add_log(
+        f"admin {current_user.username} edited grade {grade.username} {grade.className} {grade.type} {grade.grade}")
     db.session.commit()
     return grade_to_dict(grade)

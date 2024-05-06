@@ -16,24 +16,41 @@
   "description": "Description",
 
   "time": "Time",
+  "action": "Action",
   "type": "Type",
 
   "grade": "Grade",
   "average": "Average",
+  "quizAverage": "Quiz Average",
+  "midtermAverage": "Midterm Average",
+  "finalAverage": "Final Average",
+
+  "log": "Log",
+  "logs": "Logs",
+  "feedback": "Feedback",
+  "feedbacks": "Feedbacks",
 
   "name": "Name",
+  "address": "Address",
+  "teacher": "Teacher",
   "username": "Username",
-  "password": "Password",
+  "password": "password",
+  "username3": "Username (3 or more characters)",
+  "password8": "Password (8 or more characters)",
 
   "adminPanel": "Admin Panel",
-  "adminPassword": "Admin password",
 
   "search": "Search",
+  "text": "Text",
+
+  "hi": "Hi",
 
   "add": "Add",
   "addStudent": "Add Student",
   "addClass": "Add Class",
   "addGrade": "Add Grade",
+  "addAdmin": "Add Admin",
+  "addFeedback": "Add Feedback",
 
   "edit": "Edit",
   "editStudent": "Edit Student",
@@ -53,5 +70,7 @@
   "takenusername": "username is already taken",
   "nouser": "user is not found",
 
-  "userPanel": "User Panel"
+  "userPanel": "User Panel",
+
+  "className": "Class Name"
 }

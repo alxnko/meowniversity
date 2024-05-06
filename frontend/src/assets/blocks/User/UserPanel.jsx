@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
+import { VscFeedback } from "react-icons/vsc";
 import { AuthContext, TranslationContext } from "../../contexts/contexts";
 import AdminList from "../Admin/AdminList";
 import AddStudent from "../Admin/PopUps/AddStudent";
 import ClassBlock from "../blocks/ClassBlock";
 import GradeBlock from "../blocks/GradeBlock";
 import Logo from "../Logo/Logo";
+import AddFeedback from "./Feedback/AddFeedback";
 
 export default function UserPanel() {
   const { t } = useContext(TranslationContext);
   const { user, fetchUser } = useContext(AuthContext);
   const [panelView, setPanelView] = useState("");
+
+  const [showAddFeedback, setShowAddFeedback] = useState(false);
 
   const [classes, setClasses] = useState(undefined);
   const [grades, setGrades] = useState(undefined);
@@ -58,6 +62,7 @@ export default function UserPanel() {
         isEdit={user}
         setIsEdit={(a) => {}}
       />
+      <AddFeedback isShow={showAddFeedback} setIsShow={setShowAddFeedback} />
       <div>
         {user ? (
           <>
@@ -71,15 +76,33 @@ export default function UserPanel() {
                   {user.username}#{user.id}
                 </h4>
                 <p>
+                  {t("quizAverage")}: {user.quizAverage}
+                </p>
+                <p>
+                  {t("midtermAverage")}: {user.midtermAverage}
+                </p>
+                <p>
+                  {t("finalAverage")}: {user.finalAverage}
+                </p>
+                <p>
                   {t("email")}: {user.email}
                 </p>
                 <p>
                   {t("phone")}: {user.phone}
                 </p>
+                <p>
+                  {t("address")}: {user.address}
+                </p>
               </div>
               <div style={{ minWidth: "65px", textAlign: "right" }}>
                 <p>{t("average")}</p>
                 <h1>{user.averageGrade}</h1>
+                <button
+                  onClick={() => setShowAddFeedback(true)}
+                  className="round-button w3"
+                >
+                  <VscFeedback />
+                </button>
               </div>
             </div>
             <div>
@@ -101,7 +124,7 @@ export default function UserPanel() {
               </button>
               <button
                 onClick={() => setIsEdit(true)}
-                className="round-button w3"
+                className="round-button w3 edit"
               >
                 {t("edit")}
               </button>

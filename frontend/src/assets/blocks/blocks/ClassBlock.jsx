@@ -18,20 +18,40 @@ export default function StudentBlock({ item, remove, edit }) {
             <p>
               {t("description")}: {item.description}
             </p>
+            <hr />
+            <p>
+              {t("quizAverage")}: {item.quizAverage}
+              {item.quizCount
+                ? "(" + item.quizCount + "/" + item.all + ")"
+                : null}
+            </p>
+            <p>
+              {t("midtermAverage")}: {item.midtermAverage}{" "}
+              {item.midtermCount
+                ? "(" + item.midtermCount + "/" + item.all + ")"
+                : null}
+            </p>
+            <p>
+              {t("finalAverage")}: {item.finalAverage}
+              {item.finalCount
+                ? "(" + item.finalCount + "/" + item.all + ")"
+                : null}
+            </p>
+          </div>
+          <div style={{ minWidth: "65px", textAlign: "right" }}>
+            <p>{t("average")}</p>
+            <h2>{item.averageGrade}</h2>
             {user.type == "admin" ? (
               <>
                 <button onClick={() => edit(item)}>
                   <MdEdit />
                 </button>
+                <br />
                 <button onClick={() => remove(item.id)}>
                   <MdDelete />
                 </button>
               </>
             ) : null}
-          </div>
-          <div style={{ minWidth: "65px", textAlign: "right" }}>
-            <p>{t("average")}</p>
-            <h2>{item.averageGrade}</h2>
           </div>
         </>
       ) : null}

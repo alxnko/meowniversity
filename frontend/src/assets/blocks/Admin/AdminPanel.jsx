@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext, TranslationContext } from "../../contexts/contexts";
 import AdminBlock from "../blocks/AdminBlock";
 import ClassBlock from "../blocks/ClassBlock";
+import FeedbackBlock from "../blocks/FeedbackBlock";
 import GradeBlock from "../blocks/GradeBlock";
+import LogBlock from "../blocks/LogBlock";
 import StudentBlock from "../blocks/StudentBlock";
 import Logo from "../Logo/Logo";
 import AdminList from "./AdminList";
@@ -21,6 +23,8 @@ export default function AdminPanel() {
   const [classes, setClasses] = useState(undefined);
   const [grades, setGrades] = useState(undefined);
   const [admins, setAdmins] = useState(undefined);
+  const [feedbacks, setFeedbacks] = useState(undefined);
+  const [logs, setLogs] = useState(undefined);
 
   const [showAddStudent, setShowAddStudent] = useState(false);
   const [showAddClass, setShowAddClass] = useState(false);
@@ -31,10 +35,10 @@ export default function AdminPanel() {
 
   function edit(item) {
     setIsEdit(item);
-    if ("type" in item) {
-      setShowAddAdmin(true);
-    } else if ("grade" in item) {
+    if ("grade" in item) {
       setShowAddGrade(true);
+    } else if ("type" in item) {
+      setShowAddAdmin(true);
     } else if ("description" in item) {
       setShowAddClass(true);
     } else if ("password" in item) {
@@ -114,6 +118,24 @@ export default function AdminPanel() {
         getAdmins();
       });
   }
+  function deleteFeedback(id) {
+    fetch("/api/f/delete_feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
+    })
+      .then((res) => {
+        if (res.status != "200") {
+          return "error";
+        }
+        return res.json();
+      })
+      .then((data) => {
+        getFeedbacks();
+      });
+  }
 
   function getStudents() {
     fetch("/api/u/get_users")
@@ -163,6 +185,30 @@ export default function AdminPanel() {
         setAdmins(data.admins);
       });
   }
+  function getFeedbacks() {
+    fetch("/api/f/get_feedbacks")
+      .then((res) => {
+        if (res.status != "200") {
+          return "error";
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setFeedbacks(data.feedbacks);
+      });
+  }
+  function getLogs() {
+    fetch("/api/l/get_logs")
+      .then((res) => {
+        if (res.status != "200") {
+          return "error";
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setLogs(data.logs);
+      });
+  }
 
   useEffect(() => {
     if (panelView == "students") {
@@ -173,8 +219,14 @@ export default function AdminPanel() {
       getGrades();
     } else if (panelView == "admins") {
       getAdmins();
+    } else if (panelView == "feedbacks") {
+      getFeedbacks();
+    } else if (panelView == "logs") {
+      getLogs();
     }
   }, [panelView]);
+
+  useEffect(() => {});
 
   return (
     <>
@@ -213,7 +265,35 @@ export default function AdminPanel() {
       />
       <div>
         <Logo />
+        <h3 className="center">
+          {t("hi")}, {user.name}
+        </h3>
         <h2 className="center">{t("adminPanel")}</h2>
+        <p className="center">
+          {user.username}#{user.id}
+        </p>
+        <div className="flex-center">
+          <button className="round-button w3 edit" onClick={() => edit(user)}>
+            {t("edit")}
+          </button>
+          <button
+            onClick={() => setPanelView("logs")}
+            className={
+              "round-button w3 edit" + (panelView == "logs" ? " active" : "")
+            }
+          >
+            {t("logs")}
+          </button>
+          <button
+            className={
+              "round-button w3 edit" +
+              (panelView == "feedbacks" ? " active" : "")
+            }
+            onClick={() => setPanelView("feedbacks")}
+          >
+            {t("feedbacks")}
+          </button>
+        </div>
         <div className="flex-center">
           <button
             onClick={() => setShowAddStudent(true)}
@@ -292,6 +372,16 @@ export default function AdminPanel() {
             remove={deleteGrade}
             edit={edit}
           />
+        </div>
+        <div style={{ display: panelView == "feedbacks" ? "block" : "none" }}>
+          <AdminList
+            Component={FeedbackBlock}
+            data={feedbacks}
+            remove={deleteFeedback}
+          />
+        </div>
+        <div style={{ display: panelView == "logs" ? "block" : "none" }}>
+          <AdminList Component={LogBlock} data={logs} />
         </div>
         <div style={{ display: panelView == "admins" ? "block" : "none" }}>
           <div

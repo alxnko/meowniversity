@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import PopUp from "../../../blocks/PopUps/PopUp";
-import { TranslationContext } from "../../../contexts/contexts";
+import { AuthContext, TranslationContext } from "../../../contexts/contexts";
 import { createPostData } from "../../../scripts/createPostData";
 
 export default function AddStudent({
@@ -11,6 +11,7 @@ export default function AddStudent({
   setIsEdit,
 }) {
   const { t } = useContext(TranslationContext);
+  const { user, fetchUser } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -57,7 +58,11 @@ export default function AddStudent({
             setName("");
             setUsername("");
             setPassword("");
-            getAdmins();
+            if (isEdit.username == user.username) {
+              fetchUser();
+            } else {
+              getAdmins();
+            }
             setIsShow(false);
             setIsEdit(false);
           });
@@ -91,9 +96,7 @@ export default function AddStudent({
   return (
     <PopUp show={isShow} setIsShow={setIsShow}>
       <form autoComplete="off" onSubmit={addStudent}>
-        <h3 className="center">
-          {isEdit ? t("editStudent") : t("addStudent")}
-        </h3>
+        <h3 className="center">{isEdit ? t("editAdmin") : t("addAdmin")}</h3>
         <label htmlFor="student-name">{t("name")}</label>
         <input
           type="text"
@@ -102,7 +105,7 @@ export default function AddStudent({
           autoComplete="off"
           onChange={(e) => setName(e.target.value)}
         />
-        <label htmlFor="username">{t("username")}</label>
+        <label htmlFor="username">{t("username3")}</label>
         <input
           type="text"
           name="username"
@@ -110,7 +113,7 @@ export default function AddStudent({
           autoComplete="off"
           onChange={handleUsername}
         />
-        <label htmlFor="password">{t("password")}</label>
+        <label htmlFor="password">{t("password8")}</label>
         <input
           type="text"
           name="password"
